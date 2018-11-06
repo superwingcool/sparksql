@@ -1,6 +1,7 @@
 package com.wing.data.util
 
 
+import com.ggstar.util.ip.IpHelper
 import org.apache.spark.sql.Row
 import org.apache.spark.sql.types.{LongType, StringType, StructField, StructType}
 
@@ -12,7 +13,7 @@ object AccessConvertUtil {
     StructField("cmsId", LongType),
     StructField("traffic", LongType),
     StructField("ip", StringType),
-    StructField("city", StringType),
+    StructField("region", StringType),
     StructField("time", StringType),
     StructField("day", StringType)
   ))
@@ -36,16 +37,15 @@ object AccessConvertUtil {
         cmsId = cmsInfo(1).toLong
       }
 
-      val city = ""
+      val region = IpHelper.findRegionByIp(ip)
 
       val time = logDatas(0)
       val day = time.substring(0, 10).replaceAll("-", "")
 
-      Row(url, cmsType, cmsId, traffic, ip, city, time, day)
+      Row(url, cmsType, cmsId, traffic, ip, region, time, day)
     } catch {
       case e: Exception => Row(0)
     }
   }
-
 
 }

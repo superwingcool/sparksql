@@ -15,6 +15,8 @@ object DateUtils {
     TARGET_FORMAT.format(new Date(getTime(time)))
   }
 
+  //[10/Nov/2016:00:01:02 +0800]
+  //解析如上字符串
   def getTime(time: String): Long = {
 
     try {
@@ -27,10 +29,5 @@ object DateUtils {
     }
 
   }
-
-  def main(args: Array[String]): Unit = {
-    println(parse("[10/Nov/2016:00:01:02 +0800]"))
-  }
-
 
 }
